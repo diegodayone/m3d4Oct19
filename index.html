@@ -58,6 +58,8 @@
 
     window.onload = () =>{
         loadArrow("eminem")
+
+      
         // loadArrow("metallica")
         // loadArrow("einaudi")
     }
@@ -110,6 +112,42 @@
 
             loadedSongs = json.data;
 
+            let duration = 0;
+            loadedSongs.forEach(song => {
+                duration += song.duration
+            })
+
+            console.log(loadedSongs.reduce((accumulator,currentItem) => accumulator + parseInt(currentItem.duration),0))
+
+            var indexedSongs = loadedSongs.reduce((accumulator, song) => {
+                accumulator[song.id] = song;
+                return accumulator
+            }, {})
+            console.log(indexedSongs)
+
+            // console.log(loadedSongs
+            //         .map(x => parseInt(x.duration))  // extracting only the duration
+            //         .reduce((acc, currentSong) => acc + currentSong)) //summing the duration
+
+            console.log(duration)
+
+            // let albums = loadedSongs.map(song => song.album)
+            // console.log(albums)
+
+            // var myHtml = loadedSongs.map(song => `
+            //     <h1>${song.title}</h1>
+            //     <p>${song.album.title} - ${song.album.year}</p>
+            // `)
+
+            // myHtml.forEach(html => cardContainer.innerHTML += html)
+
+            // loadedSongs.forEach(song => {
+            //     cardContainer.innerHTML += `
+            //             <h1>${song.title}</h1>
+            //             <p>${song.album.title} - ${song.album.year}</p>
+            //         `
+            // })
+
             // console.log("BEFORE FILTER: ", json.data)
 
             // let filteredSongs = json.data.filter(song => song.id == "790041102")
@@ -126,8 +164,10 @@
 
             loadedSongs.forEach(currentSong => {
                 cardContainer.innerHTML += `
-                     <div class="col-sm-3 col-md-2 card"  onclick="detailMe('${currentSong.id}')">
+                     <div class="col-sm-3 col-md-2 card" >
+                        <a href="details.html?songId=${currentSong.id}">
                          <img src="${currentSong.album.cover}">
+                         </a>
                        <span> ${currentSong.title} </span>
                      </div>
                  `
@@ -146,6 +186,7 @@
 
             // return;
             // let currentSong = undefined
+            return;
             for (var i = 0; i < json.data.length; i++){
                 currentSong = json.data[i]
                 var div = document.createElement("div")
