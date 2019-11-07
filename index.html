@@ -159,9 +159,9 @@
             // }
 
             // console.log(boringStuff)
-
             // console.log("AFTER FILTER: ", filteredSongs)
 
+            //NAVIGATION
             loadedSongs.forEach(currentSong => {
                 cardContainer.innerHTML += `
                      <div class="col-sm-3 col-md-2 card" >
@@ -172,6 +172,17 @@
                      </div>
                  `
             })
+
+            //MODAL
+            // loadedSongs.forEach(currentSong => {
+            //     cardContainer.innerHTML += `
+            //          <div class="col-sm-3 col-md-2 card" onClick="openModalWithID('${currentSong.id}')">
+            //              <img src="${currentSong.album.cover}">
+            //            <span> ${currentSong.title} </span>
+            //          </div>
+            //      `
+            // })
+
 
 
             // json.data.forEach(currentSong => {
@@ -213,6 +224,18 @@
             console.log(err);
         });
     }
+
+    openModalWithID = (id) =>{
+        let modalBody = document.querySelector(".modal-body")
+
+        let song = loadedSongs.find(x => x.id == id)
+
+        modalBody.innerHTML = `
+            <img src="${song.album.cover_xl}" style="width:100%" >
+        `
+
+        $('#myModal').modal()
+    }
     
     function createCards(){
         var cardContainer = document.querySelector("#cardContainer")
@@ -231,6 +254,26 @@
         }
     }
     </script>
+
+<div class="modal" id="myModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
     <!-- Optional JavaScript -->

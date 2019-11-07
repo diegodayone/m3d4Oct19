@@ -11,8 +11,18 @@
   </head>
   <body>
       
-    <h1> HIT! </h1>
+    <h1><a href="index.html"> Back </a></h1>
 
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <img id="albumCover" style="width:100%">
+            </div>
+            <div class="col-sm-8" id="trackDetails">
+
+            </div>
+        </div>
+    </div>
 
     <script>
     
@@ -29,8 +39,22 @@
                 }
             })
             .then(response => response.json())
-            .then(json => {
-                console.log(json)
+            .then(track => {
+                console.log(track)
+
+                let albumCover = document.querySelector("#albumCover");
+                albumCover.src = track.album.cover_big
+
+                let trackDetails = document.querySelector("#trackDetails")
+                trackDetails.innerHTML = `
+                <ul class="list-group">
+                    <li class="list-group-item">Title: ${track.title}</li>
+                    <li class="list-group-item">Album: ${track.album.title}</li>
+                    <li class="list-group-item">Duration: ${track.duration}</li>
+                    <li class="list-group-item">Countries: ${track.available_countries}</li>
+                </ul>
+                `
+
             })
         }
     
